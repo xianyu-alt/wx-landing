@@ -3,149 +3,276 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>添加微信 · 联系我们</title>
+<meta name="theme-color" content="#0a0f1e" />
+<title>添加微信 · 一对一技术答疑</title>
+<meta property="og:title" content="添加微信 · 一对一技术答疑" />
+<meta property="og:description" content="复制微信号，添加一对一技术支持、项目合作与售后咨询。" />
 <style>
+  :root{
+    --bg1:#0a0f1e; --bg2:#101b33;
+    --card:#121a2e;
+    --line:rgba(255,255,255,.08);
+    --txt:#e8eefb; --muted:#8ea0c0; --faint:#5a6a88;
+    --accent:#3d9bff; --accent2:#35e0b8;
+    --ok:#2ecc71;
+    --r:20px;
+  }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-    background:linear-gradient(160deg,#0f1c2e 0%,#1a2a44 55%,#0d1420 100%);
-    color:#eaf2ff;display:flex;align-items:center;justify-content:center;padding:20px;
+    background:
+      radial-gradient(900px 500px at 12% -8%, rgba(61,155,255,.20), transparent 60%),
+      radial-gradient(700px 460px at 95% 4%, rgba(53,224,184,.14), transparent 55%),
+      linear-gradient(165deg, var(--bg1) 0%, var(--bg2) 60%, #0b1120 100%);
+    color:var(--txt);
+    min-height:100%;
+    display:flex;align-items:center;justify-content:center;
+    padding:28px 18px;
+    overflow-x:hidden;
   }
+
   .card{
-    width:100%;max-width:420px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:22px;
-    padding:38px 26px 30px;
-    text-align:center;
-    backdrop-filter:blur(8px);
-    box-shadow:0 24px 60px rgba(0,0,0,.45);
+    width:100%;max-width:430px;
+    background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    border:1px solid var(--line);
+    border-radius:var(--r);
+    padding:30px 24px 26px;
+    position:relative;
+    box-shadow:0 30px 80px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.05);
+    backdrop-filter:blur(10px);
   }
-  .badge{
-    display:inline-block;font-size:12px;letter-spacing:2px;
-    color:#8fd3ff;background:rgba(64,160,255,.14);
-    border:1px solid rgba(64,160,255,.3);
-    padding:6px 14px;border-radius:999px;margin-bottom:20px;
+  .card::before{
+    content:"";position:absolute;inset:-1px;border-radius:calc(var(--r) + 1px);
+    background:linear-gradient(120deg, rgba(61,155,255,.35), transparent 40%, transparent 60%, rgba(53,224,184,.3));
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;padding:1px;pointer-events:none;
   }
-  h1{font-size:24px;font-weight:700;margin-bottom:8px}
-  .sub{font-size:14px;color:#9fb0c8;line-height:1.7;margin-bottom:26px}
-  .copy-box{
-    display:flex;align-items:center;justify-content:center;gap:12px;
-    background:rgba(255,255,255,.06);
-    border:1px dashed rgba(120,180,255,.4);
-    border-radius:14px;padding:16px;margin-bottom:14px;
+
+  /* 顶部品牌行 */
+  .top{
+    display:flex;align-items:center;gap:12px;margin-bottom:18px;
   }
-  .wx{
-    font-size:26px;font-weight:800;letter-spacing:2px;
-    color:#fff;font-family:Consolas,Menlo,monospace;
+  .logo{
+    width:46px;height:46px;border-radius:14px;flex-shrink:0;
+    background:linear-gradient(135deg, var(--accent), var(--accent2));
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;box-shadow:0 8px 20px rgba(61,155,255,.35);
   }
-  .wx.is-placeholder{color:#7f95b8;font-size:16px;font-weight:500;letter-spacing:0}
-  button.copy{
-    border:0;cursor:pointer;flex-shrink:0;
-    background:linear-gradient(135deg,#1e90ff,#4fd1c5);
-    color:#fff;font-size:15px;font-weight:600;
-    padding:10px 18px;border-radius:10px;
-    transition:transform .15s,opacity .15s;
+  .brand{display:flex;flex-direction:column;gap:3px}
+  .brand .name{font-size:17px;font-weight:800;letter-spacing:.5px}
+  .brand .sub2{font-size:11.5px;color:var(--muted);letter-spacing:1.5px}
+
+  .head{margin-bottom:20px}
+  .head h1{font-size:25px;font-weight:800;line-height:1.3;letter-spacing:.5px}
+  .head h1 .hl{background:linear-gradient(90deg, var(--accent), var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .head p{margin-top:8px;font-size:13.5px;color:var(--muted);line-height:1.75}
+
+  /* 权益 */
+  .perks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px}
+  .perk{
+    background:rgba(255,255,255,.035);border:1px solid var(--line);
+    border-radius:14px;padding:12px 8px;text-align:center;
   }
-  button.copy:active{transform:scale(.96)}
-  button.copy.ok{background:linear-gradient(135deg,#2ecc71,#27ae60)}
-  .tip{font-size:13px;color:#8396ad;line-height:1.8;margin-bottom:18px}
+  .perk .ic{font-size:19px;line-height:1}
+  .perk .t{font-size:11.5px;color:#c7d3ea;margin-top:7px;letter-spacing:.3px}
+
+  /* 微信号区 */
+  .wxzone{
+    background:rgba(255,255,255,.045);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px 16px 14px;margin-bottom:16px;position:relative;overflow:hidden;
+  }
+  .wxzone::after{
+    content:"";position:absolute;top:-40px;right:-40px;width:130px;height:130px;border-radius:50%;
+    background:radial-gradient(circle, rgba(61,155,255,.28), transparent 70%);pointer-events:none;
+  }
+  .wxlabel{font-size:11.5px;color:var(--muted);letter-spacing:1.5px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .wxlabel .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+  .wxrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .wxid{
+    font-size:30px;font-weight:800;letter-spacing:3px;
+    font-family:"SF Mono",Consolas,Menlo,monospace;
+    color:#fff;line-height:1;
+    background:linear-gradient(90deg,#fff,#cfe6ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 2px 20px rgba(61,155,255,.35);
+  }
+  .copybtn{
+    display:inline-flex;align-items:center;gap:7px;
+    border:0;cursor:pointer;
+    background:linear-gradient(135deg, var(--accent), var(--accent2));
+    color:#fff;font-size:14px;font-weight:700;
+    padding:11px 20px;border-radius:12px;
+    box-shadow:0 8px 22px rgba(61,155,255,.4);
+    transition:transform .15s,box-shadow .15s;
+    letter-spacing:1px;
+  }
+  .copybtn:active{transform:scale(.97)}
+  .copybtn.ok{background:linear-gradient(135deg, var(--ok), #1f9d55);box-shadow:0 8px 22px rgba(46,204,113,.4)}
+  .copybtn svg{width:15px;height:15px}
+  .wxhint{margin-top:11px;font-size:12px;color:#9fb0cc;line-height:1.7}
+  .wxhint b{color:#cfe6ff}
+
+  /* 步骤 */
   .steps{
-    text-align:left;background:rgba(0,0,0,.18);
-    border-radius:14px;padding:16px 18px;margin-top:6px;
+    background:rgba(0,0,0,.22);
+    border:1px solid var(--line);
+    border-radius:16px;padding:15px 16px;margin-bottom:14px;
   }
-  .steps b{color:#cfe6ff;font-size:14px;display:block;margin-bottom:10px}
+  .steps .cap{font-size:12.5px;font-weight:700;color:#d6e2f5;margin-bottom:9px;letter-spacing:.5px}
+  .steps ol{list-style:none;counter-reset:st}
   .steps li{
-    list-style:none;font-size:13px;color:#a9b8cc;line-height:2;
+    position:relative;padding:6px 0 6px 30px;
+    font-size:13px;color:#aebbd6;line-height:1.55;
+    counter-increment:st;
   }
-  .steps li::before{content:"① ";color:#4fd1c5}
-  .steps li:nth-child(2)::before{content:"② "}
-  .steps li:nth-child(3)::before{content:"③ "}
-  .foot{margin-top:22px;font-size:11px;color:#5f7089}
+  .steps li::before{
+    content:counter(st);
+    position:absolute;left:0;top:5px;
+    width:21px;height:21px;border-radius:50%;
+    background:rgba(61,155,255,.18);border:1px solid rgba(61,155,255,.4);
+    color:#9cc8ff;font-size:11.5px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .steps li b{color:#e6f0ff;font-weight:600}
+
+  .foot{
+    display:flex;align-items:center;justify-content:space-between;
+    font-size:11px;color:var(--faint);margin-top:14px;gap:8px;flex-wrap:wrap;
+  }
+  .foot .clock{display:flex;align-items:center;gap:6px}
+  .foot .clock i{width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);font-style:normal}
+
+  /* toast */
   .toast{
-    position:fixed;top:24px;left:50%;transform:translateX(-50%) translateY(-10px);
-    background:#2ecc71;color:#fff;font-size:14px;font-weight:600;
-    padding:10px 22px;border-radius:999px;opacity:0;pointer-events:none;
-    transition:all .3s;box-shadow:0 8px 24px rgba(46,204,113,.4);z-index:9;
+    position:fixed;top:22px;left:50%;transform:translateX(-50%) translateY(-14px);
+    background:linear-gradient(135deg, var(--ok), #1f9d55);color:#fff;
+    font-size:13.5px;font-weight:700;padding:11px 24px;border-radius:999px;
+    opacity:0;pointer-events:none;transition:all .32s cubic-bezier(.2,.9,.3,1.4);
+    box-shadow:0 12px 30px rgba(46,204,113,.45);z-index:9;letter-spacing:.5px;
+    display:flex;align-items:center;gap:8px;
   }
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* 心 */
+  .heart{position:fixed;font-size:22px;pointer-events:none;z-index:8;animation:rise 1.4s ease forwards}
+  @keyframes rise{0%{opacity:1;transform:translateY(0) scale(.8)}100%{opacity:0;transform:translateY(-70px) scale(1.5)}}
+
+  @media (max-width:380px){
+    .perks{grid-template-columns:1fr 1fr}
+    .wxid{font-size:26px}
+  }
 </style>
 </head>
 <body>
-<div class="toast" id="toast">已复制，打开微信添加即可</div>
+<div class="toast" id="toast">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  已复制微信号，去微信添加吧
+</div>
 
 <div class="card">
-  <div class="badge">技术支持</div>
-  <h1>联系我们 · 添加微信</h1>
-  <p class="sub">如需技术方案、项目合作或售后支持，<br/>复制下方微信号，打开微信添加好友即可。</p>
-
-  <div class="copy-box">
-    <!-- 将下面 id 为 wx 的元素内的文字替换为你的微信号 -->
-    <span class="wx" id="wx">微信号：请替换</span>
-    <button class="copy" id="copyBtn">复制</button>
+  <div class="top">
+    <div class="logo">🛠️</div>
+    <div class="brand">
+      <span class="name">技术支持中心</span>
+      <span class="sub2">TECH · SUPPORT</span>
+    </div>
   </div>
 
-  <p class="tip">复制后请退出当前 App，打开微信「添加好友」粘贴即可</p>
+  <div class="head">
+    <h1>添加微信，<span class="hl">一对一专属对接</span></h1>
+    <p>技术方案、项目合作、售后支持，<br/>复制下方微信号，添加即可开始沟通。</p>
+  </div>
+
+  <div class="perks">
+    <div class="perk"><div class="ic">⚡</div><div class="t">响应快</div></div>
+    <div class="perk"><div class="ic">💬</div><div class="t">一对一</div></div>
+    <div class="perk"><div class="ic">🔒</div><div class="t">专业保密</div></div>
+  </div>
+
+  <div class="wxzone">
+    <div class="wxlabel"><span class="dot"></span>官方微信号</div>
+    <div class="wxrow">
+      <span class="wxid" id="wxid">L897049</span>
+      <button class="copybtn" id="copyBtn">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="12" height="12" rx="2.5" stroke="#fff" stroke-width="2.2"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5" stroke="#fff" stroke-width="2.2"/></svg>
+        一键复制
+      </button>
+    </div>
+    <p class="wxhint">复制后 <b>退出当前 App → 打开微信 → 添加朋友</b>，粘贴即可</p>
+  </div>
 
   <div class="steps">
-    <b>添加步骤</b>
-    <ul>
-      <li>点右侧「复制」按钮，复制微信号</li>
-      <li>退出抖音，打开微信</li>
-      <li>首页右上角「+」→ 添加朋友 → 粘贴微信号</li>
-    </ul>
+    <div class="cap">添加步骤</div>
+    <ol>
+      <li>点上方 <b>「一键复制」</b>，复制微信号</li>
+      <li>退出抖音，打开 <b>微信</b></li>
+      <li>首页右上角 <b>＋ → 添加朋友</b>，粘贴搜索</li>
+    </ol>
   </div>
 
-  <p class="foot">工作时间：09:00 - 21:00（周末不休）</p>
+  <div class="foot">
+    <span class="clock"><i></i>09:00 – 21:00 · 周末不休</span>
+    <span>技术支持中心</span>
+  </div>
 </div>
 
 <script>
 (() => {
-  // ===== 在这里填你的微信号（只留号码，不要"微信号："前缀）=====
   const WX_ID = "L897049";
-  // ===========================================================
 
-  const wxEl = document.getElementById('wx');
-  const btn = document.getElementById('copyBtn');
   const toast = document.getElementById('toast');
+  const btn = document.getElementById('copyBtn');
 
-  // 如果已配置真实微信号，就显示并启用复制
-  if (WX_ID && WX_ID !== "在这里填入微信号") {
-    wxEl.textContent = WX_ID;
-    wxEl.classList.remove('is-placeholder');
-  } else {
-    wxEl.classList.add('is-placeholder');
-  }
+  document.getElementById('wxid').textContent = WX_ID;
 
   function copyText(t){
-    if (navigator.clipboard && window.isSecureContext) {
-      return navigator.clipboard.writeText(t);
-    }
-    // 非 https 或老浏览器降级
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
     return new Promise((resolve, reject) => {
       const ta = document.createElement('textarea');
       ta.value = t; ta.style.position='fixed'; ta.style.opacity='0';
-      document.body.appendChild(ta); ta.select();
+      document.body.appendChild(ta); ta.focus(); ta.select();
       try { document.execCommand('copy') ? resolve() : reject(); }
       catch(e){ reject(e); } finally { document.body.removeChild(ta); }
     });
   }
 
-  function showToast(msg){
-    toast.textContent = msg;
+  function showToast(){
     toast.classList.add('show');
-    setTimeout(()=>toast.classList.remove('show'), 2200);
+    setTimeout(()=>toast.classList.remove('show'), 2400);
+  }
+
+  function burst(){
+    const emojis = ['💙','💛','🧡'];
+    for(let i=0;i<5;i++){
+      setTimeout(()=>{
+        const h = document.createElement('div');
+        h.className='heart'; h.textContent = emojis[i%3];
+        h.style.left = (window.innerWidth/2 - 40 + Math.random()*80) + 'px';
+        h.style.top = (window.innerHeight/2 - 60) + 'px';
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(), 1400);
+      }, i*110);
+    }
   }
 
   btn.addEventListener('click', () => {
-    const target = (WX_ID && WX_ID !== "在这里填入微信号") ? WX_ID : null;
-    if (!target) { showToast('请先在代码里填入微信号'); return; }
-    copyText(target).then(() => {
-      btn.classList.add('ok'); btn.textContent = '已复制 ✓';
-      showToast('已复制，打开微信添加即可');
-      setTimeout(()=>{ btn.classList.remove('ok'); btn.textContent='复制'; }, 2000);
-    }).catch(()=> showToast('复制失败，请手动长按复制'));
+    copyText(WX_ID).then(() => {
+      btn.classList.add('ok');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" width="15" height="15"><path d="M20 6L9 17l-5-5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg> 已复制 ✓';
+      showToast(); burst();
+      setTimeout(()=>{ btn.classList.remove('ok'); btn.innerHTML = orig; }, 2200);
+    }).catch(()=> showToast());
+  });
+
+  // 整页长按也可复制（移动端友好）
+  document.addEventListener('contextmenu', e => {
+    if (e.target.closest('.wxid')) {
+      copyText(WX_ID).then(showToast).catch(()=>{});
+    }
   });
 })();
 </script>
