@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>添加微信 · 联系我们</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(160deg,#0f1c2e 0%,#1a2a44 55%,#0d1420 100%);
+    color:#eaf2ff;display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+  .card{
+    width:100%;max-width:420px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:22px;
+    padding:38px 26px 30px;
+    text-align:center;
+    backdrop-filter:blur(8px);
+    box-shadow:0 24px 60px rgba(0,0,0,.45);
+  }
+  .badge{
+    display:inline-block;font-size:12px;letter-spacing:2px;
+    color:#8fd3ff;background:rgba(64,160,255,.14);
+    border:1px solid rgba(64,160,255,.3);
+    padding:6px 14px;border-radius:999px;margin-bottom:20px;
+  }
+  h1{font-size:24px;font-weight:700;margin-bottom:8px}
+  .sub{font-size:14px;color:#9fb0c8;line-height:1.7;margin-bottom:26px}
+  .copy-box{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    background:rgba(255,255,255,.06);
+    border:1px dashed rgba(120,180,255,.4);
+    border-radius:14px;padding:16px;margin-bottom:14px;
+  }
+  .wx{
+    font-size:26px;font-weight:800;letter-spacing:2px;
+    color:#fff;font-family:Consolas,Menlo,monospace;
+  }
+  .wx.is-placeholder{color:#7f95b8;font-size:16px;font-weight:500;letter-spacing:0}
+  button.copy{
+    border:0;cursor:pointer;flex-shrink:0;
+    background:linear-gradient(135deg,#1e90ff,#4fd1c5);
+    color:#fff;font-size:15px;font-weight:600;
+    padding:10px 18px;border-radius:10px;
+    transition:transform .15s,opacity .15s;
+  }
+  button.copy:active{transform:scale(.96)}
+  button.copy.ok{background:linear-gradient(135deg,#2ecc71,#27ae60)}
+  .tip{font-size:13px;color:#8396ad;line-height:1.8;margin-bottom:18px}
+  .steps{
+    text-align:left;background:rgba(0,0,0,.18);
+    border-radius:14px;padding:16px 18px;margin-top:6px;
+  }
+  .steps b{color:#cfe6ff;font-size:14px;display:block;margin-bottom:10px}
+  .steps li{
+    list-style:none;font-size:13px;color:#a9b8cc;line-height:2;
+  }
+  .steps li::before{content:"① ";color:#4fd1c5}
+  .steps li:nth-child(2)::before{content:"② "}
+  .steps li:nth-child(3)::before{content:"③ "}
+  .foot{margin-top:22px;font-size:11px;color:#5f7089}
+  .toast{
+    position:fixed;top:24px;left:50%;transform:translateX(-50%) translateY(-10px);
+    background:#2ecc71;color:#fff;font-size:14px;font-weight:600;
+    padding:10px 22px;border-radius:999px;opacity:0;pointer-events:none;
+    transition:all .3s;box-shadow:0 8px 24px rgba(46,204,113,.4);z-index:9;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="toast" id="toast">已复制，打开微信添加即可</div>
+
+<div class="card">
+  <div class="badge">技术支持</div>
+  <h1>联系我们 · 添加微信</h1>
+  <p class="sub">如需技术方案、项目合作或售后支持，<br/>复制下方微信号，打开微信添加好友即可。</p>
+
+  <div class="copy-box">
+    <!-- 将下面 id 为 wx 的元素内的文字替换为你的微信号 -->
+    <span class="wx" id="wx">微信号：请替换</span>
+    <button class="copy" id="copyBtn">复制</button>
+  </div>
+
+  <p class="tip">复制后请退出当前 App，打开微信「添加好友」粘贴即可</p>
+
+  <div class="steps">
+    <b>添加步骤</b>
+    <ul>
+      <li>点右侧「复制」按钮，复制微信号</li>
+      <li>退出抖音，打开微信</li>
+      <li>首页右上角「+」→ 添加朋友 → 粘贴微信号</li>
+    </ul>
+  </div>
+
+  <p class="foot">工作时间：09:00 - 21:00（周末不休）</p>
+</div>
+
+<script>
+(() => {
+  // ===== 在这里填你的微信号（只留号码，不要"微信号："前缀）=====
+  const WX_ID = "在这里填入微信号";
+  // ===========================================================
+
+  const wxEl = document.getElementById('wx');
+  const btn = document.getElementById('copyBtn');
+  const toast = document.getElementById('toast');
+
+  // 如果已配置真实微信号，就显示并启用复制
+  if (WX_ID && WX_ID !== "在这里填入微信号") {
+    wxEl.textContent = WX_ID;
+    wxEl.classList.remove('is-placeholder');
+  } else {
+    wxEl.classList.add('is-placeholder');
+  }
+
+  function copyText(t){
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(t);
+    }
+    // 非 https 或老浏览器降级
+    return new Promise((resolve, reject) => {
+      const ta = document.createElement('textarea');
+      ta.value = t; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy') ? resolve() : reject(); }
+      catch(e){ reject(e); } finally { document.body.removeChild(ta); }
+    });
+  }
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 2200);
+  }
+
+  btn.addEventListener('click', () => {
+    const target = (WX_ID && WX_ID !== "在这里填入微信号") ? WX_ID : null;
+    if (!target) { showToast('请先在代码里填入微信号'); return; }
+    copyText(target).then(() => {
+      btn.classList.add('ok'); btn.textContent = '已复制 ✓';
+      showToast('已复制，打开微信添加即可');
+      setTimeout(()=>{ btn.classList.remove('ok'); btn.textContent='复制'; }, 2000);
+    }).catch(()=> showToast('复制失败，请手动长按复制'));
+  });
+})();
+</script>
+</body>
+</html>
